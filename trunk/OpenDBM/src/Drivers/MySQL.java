@@ -55,7 +55,6 @@ public class MySQL implements IDriver {
 			rs = this.stmt.executeQuery("SHOW TABLES");
 			while (rs.next()) {
 				tables.add(new Table(rs.getString(1)));
-				System.out.println(rs.getString(1));
 			}
 			this.stmt.close();
 			this.rs.close();
