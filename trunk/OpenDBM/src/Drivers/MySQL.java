@@ -52,9 +52,10 @@ public class MySQL implements IDriver {
 		ArrayList<Table> tables = new ArrayList<Table>();
 		try {
 			this.stmt = this.con.createStatement();
-			ResultSet rs = this.stmt.executeQuery(" SHOW TABLES");
+			rs = this.stmt.executeQuery("SHOW TABLES");
 			while (rs.next()) {
 				tables.add(new Table(rs.getString(1)));
+				System.out.println(rs.getString(1));
 			}
 			this.stmt.close();
 			this.rs.close();
@@ -68,7 +69,7 @@ public class MySQL implements IDriver {
 		ArrayList<Column> columns = new ArrayList<Column>();
 		try {
 			this.stmt = this.con.createStatement();
-			ResultSet rs = this.stmt.executeQuery("SHOW COLUMNS FROM "
+			rs = this.stmt.executeQuery("SHOW COLUMNS FROM "
 					+ table.toString());
 			while (rs.next()) {
 				columns.add(new Column(rs.getString(1), rs.getString(2)));
