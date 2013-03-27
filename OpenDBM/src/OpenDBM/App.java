@@ -3,6 +3,7 @@ package OpenDBM;
 import Drivers.MySQL;
 import Schema.Column;
 import Schema.Table;
+import View.DataBaseManager;
 
 public class App {
 
@@ -11,7 +12,7 @@ public class App {
 	 */
 	public static void main(String[] args) {
 
-		MySQL m = new MySQL("cabinet");
+		MySQL m = new MySQL("magazin");
 		m.connection();
 		for (Table tb : m.getTables()) {
 			System.out.println(tb.toString());
@@ -20,6 +21,8 @@ public class App {
 			}
 		}
 		m.disconnect();
+		
+		DataBaseManager d=new DataBaseManager();
 	}
 
 }
