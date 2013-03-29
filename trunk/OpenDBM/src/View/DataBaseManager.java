@@ -12,6 +12,7 @@ public class DataBaseManager extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setJMenuBar(new Menu());
 		this.getContentPane().add(new ToolBarre(),BorderLayout.NORTH);
+		this.getContentPane().add(new DataBaseExplorer(),BorderLayout.WEST);
 		this.setVisible(true);
 	}
 }
