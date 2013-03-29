@@ -12,7 +12,7 @@ public class App {
 	 */
 	public static void main(String[] args) {
 
-		MySQL m = new MySQL("magazin");
+		MySQL m = new MySQL("cabinet");
 		m.connection();
 		for (Table tb : m.getTables()) {
 			System.out.println(tb.toString());
