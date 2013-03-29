@@ -3,6 +3,7 @@ package View;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class DataBaseManager extends JFrame {
 
@@ -13,6 +14,11 @@ public class DataBaseManager extends JFrame {
 		this.setJMenuBar(new Menu());
 		this.getContentPane().add(new ToolBarre(),BorderLayout.NORTH);
 		this.getContentPane().add(new DataBaseExplorer(),BorderLayout.WEST);
+		JPanel pan=new JPanel();
+		pan.setLayout(new BorderLayout());		
+		pan.add(new QueryEditor(),BorderLayout.CENTER);
+		pan.add(new QueryResults(),BorderLayout.SOUTH);
+		this.getContentPane().add(pan,BorderLayout.CENTER);
 		this.setVisible(true);
 	}
 }
