@@ -20,5 +20,8 @@ public class DataBaseManager extends JFrame {
 		pan.add(new QueryResults(),BorderLayout.SOUTH);
 		this.getContentPane().add(pan,BorderLayout.CENTER);
 		this.setVisible(true);
+		
+		//////////////////////////////////////////////////////////////////////////////////////////
+		Connexion c=new Connexion();
 	}
 }

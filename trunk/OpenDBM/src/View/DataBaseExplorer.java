@@ -16,5 +16,6 @@ public class DataBaseExplorer extends JPanel{
 		this.setBorder(BorderFactory.createTitledBorder("Explorateur BD:"));
 		exprorateur.setPreferredSize(new Dimension(240,500));
 		this.add(exprorateur,BorderLayout.WEST);
+		
 	}
 }
