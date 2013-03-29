@@ -40,7 +40,7 @@ public class Connexion extends JFrame {
 		this.setSize(350, 250);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		this.setTitle("Connesion");
+		this.setTitle("Connexion");
 		
 		////////////////////////////////////////////////////////////////////////////
 		
