@@ -7,8 +7,13 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 
 import Schema.Column;
 import Schema.DataBase;
@@ -16,7 +21,8 @@ import Schema.Table;
 
 public class DataBaseExplorer extends JPanel {
 
-	private DefaultTreeCellRenderer treeModel = new DefaultTreeCellRenderer();
+	private DefaultTreeCellRenderer style = new DefaultTreeCellRenderer();
+	private DefaultTreeModel model;
 	private DefaultMutableTreeNode root;
 	JTree exprorateur;
 
@@ -25,9 +31,10 @@ public class DataBaseExplorer extends JPanel {
 		this.setPreferredSize(new Dimension(250, 500));
 		this.setBorder(BorderFactory.createTitledBorder("Explorateur BD:"));
 
-		this.treeModel.setClosedIcon(new ImageIcon("images/table.png"));
-		this.treeModel.setOpenIcon(new ImageIcon("images/table.png"));
-		this.treeModel.setLeafIcon(new ImageIcon("images/field.png"));
+		this.style.setClosedIcon(new ImageIcon("images/table.png"));
+		this.style.setOpenIcon(new ImageIcon("images/table.png"));
+		this.style.setLeafIcon(new ImageIcon("images/field.png"));
+
 
 	}
 
@@ -36,17 +43,22 @@ public class DataBaseExplorer extends JPanel {
 		for (Table table : database.getTables()) {
 			DefaultMutableTreeNode node = new DefaultMutableTreeNode(
 					table.getName());
-			root.add(node);
-			for (Column colum : table.getColumns()) {
+			System.out.println(table.getName());
+			for (Column column : table.getColumns()) {
 				DefaultMutableTreeNode subnode = new DefaultMutableTreeNode(
-						colum.getName());
+						column.getName());
 				node.add(subnode);
 			}
+			root.add(node);
 		}
-		exprorateur = new JTree(root);
-		exprorateur.setRootVisible(false);
-		exprorateur.setCellRenderer(this.treeModel);
+		this.model=new DefaultTreeModel(root);
+		exprorateur=new JTree();
+		exprorateur.setModel(model);		
+		exprorateur.setCellRenderer(this.style);
+		exprorateur.setPreferredSize(new Dimension(240, 500));
 		this.add(exprorateur, BorderLayout.WEST);
+		model.reload();
+
 
 	}
 }
