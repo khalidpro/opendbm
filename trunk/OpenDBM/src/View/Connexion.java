@@ -73,6 +73,7 @@ public class Connexion extends JFrame {
 				m.disconnect();
 				DataBaseManager.db = db;
 				DataBaseManager.databaseExplorer.CreateDatabaseTree(db);
+				dispose();
 			}
 		});
 
