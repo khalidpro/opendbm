@@ -2,10 +2,13 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.ScrollPane;
+import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
@@ -24,18 +27,15 @@ public class DataBaseExplorer extends JPanel {
 	private DefaultTreeCellRenderer style = new DefaultTreeCellRenderer();
 	private DefaultTreeModel model;
 	private DefaultMutableTreeNode root;
-	JTree exprorateur;
+	JTree explorateur;
 
 	public DataBaseExplorer() {
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(250, 500));
 		this.setBorder(BorderFactory.createTitledBorder("Explorateur BD:"));
-
 		this.style.setClosedIcon(new ImageIcon("images/table.png"));
 		this.style.setOpenIcon(new ImageIcon("images/table.png"));
 		this.style.setLeafIcon(new ImageIcon("images/field.png"));
-
-
 	}
 
 	public void CreateDatabaseTree(DataBase database) {
@@ -51,14 +51,12 @@ public class DataBaseExplorer extends JPanel {
 			}
 			root.add(node);
 		}
-		this.model=new DefaultTreeModel(root);
-		exprorateur=new JTree();
-		exprorateur.setModel(model);		
-		exprorateur.setCellRenderer(this.style);
-		exprorateur.setPreferredSize(new Dimension(240, 500));
-		this.add(exprorateur, BorderLayout.WEST);
+		this.model = new DefaultTreeModel(root);
+		explorateur = new JTree();
+		explorateur.setModel(model);
+		explorateur.setCellRenderer(this.style);
+		explorateur.setPreferredSize(new Dimension(240, 500));
+		this.add(explorateur, BorderLayout.CENTER);
 		model.reload();
-
-
 	}
 }
