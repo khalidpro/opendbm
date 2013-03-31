@@ -5,8 +5,12 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class DataBaseManager extends JFrame {
+import Schema.DataBase;
 
+public class DataBaseManager extends JFrame {
+public static DataBase db;
+	
+	
 	public DataBaseManager() {
 		this.setTitle("Open DBM 1.0");
 		this.setSize(getToolkit().getScreenSize()); // plien ecran
