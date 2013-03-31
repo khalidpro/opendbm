@@ -21,7 +21,5 @@ public class DataBaseManager extends JFrame {
 		this.getContentPane().add(pan,BorderLayout.CENTER);
 		this.setVisible(true);
 		
-		//////////////////////////////////////////////////////////////////////////////////////////
-		Connexion c=new Connexion();
 	}
 }
