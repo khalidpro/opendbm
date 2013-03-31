@@ -22,7 +22,7 @@ import Schema.Table;
 public class Connexion extends JFrame {
 
 	String[] base = { "MySQL", "Oracle", "SQL Server", "Access" };
-	JComboBox<String> liste_db = new JComboBox<String>(base);
+	JComboBox liste_db = new JComboBox(base);
 	JLabel type = new JLabel("Type de base de donnée :");
 
 	JTextField txtServer = new JTextField("localhost");
@@ -45,7 +45,7 @@ public class Connexion extends JFrame {
 	JPanel panAccess = new JPanel();
 
 	public Connexion() {
-		this.setSize(350, 250);
+		this.setSize(350, 270);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setTitle("Connexion");
