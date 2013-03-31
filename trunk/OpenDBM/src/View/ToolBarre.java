@@ -17,12 +17,10 @@ public class ToolBarre extends JToolBar {
 		this.add(connexion);
 		this.add(nouveau);
 		this.add(enregistre);
-
+		
 		connexion.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Connexion c=new Connexion();
+				Connexion c = new Connexion();
 			}
 		});
 	}

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -22,15 +21,15 @@ import Schema.Table;
 
 public class Connexion extends JFrame {
 
-	String[] db = { "MySQL", "Oracle", "SQL Server", "Access" };
-	JComboBox liste_db = new JComboBox(db);
+	String[] base = { "MySQL", "Oracle", "SQL Server", "Access" };
+	JComboBox<String> liste_db = new JComboBox<String>(base);
 	JLabel type = new JLabel("Type de base de donnée :");
 
-	JTextField server = new JTextField("localhost");
-	JTextField port = new JTextField("3306");
-	JTextField user = new JTextField("root");
-	JTextField password = new JTextField("");
-	JTextField database = new JTextField("cabinet");
+	JTextField txtServer = new JTextField("localhost");
+	JTextField txtPort = new JTextField("3306");
+	JTextField txtUser = new JTextField("root");
+	JTextField txtPassword = new JTextField("");
+	JTextField txtDatabase = new JTextField("cabinet");
 
 	JLabel lblServer = new JLabel("Serveur :");
 	JLabel lblPort = new JLabel("Port  :");
@@ -61,11 +60,11 @@ public class Connexion extends JFrame {
 		con.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				DataBase db = new DataBase(liste_db.getSelectedItem()
-						.toString());
+				DataBase db = new DataBase(txtDatabase.getText());			
 				MySQL m = new MySQL(db.getName());
 				m.connection();
 				for (Table tb : m.getTables()) {
+					
 					db.addTable(tb);
 					for (Column c : m.getColumns(tb)) {
 						tb.addColumns(c);
@@ -73,6 +72,7 @@ public class Connexion extends JFrame {
 				}
 				m.disconnect();
 				DataBaseManager.db = db;
+				DataBaseManager.databaseExplorer.CreateDatabaseTree(db);
 			}
 		});
 
@@ -89,33 +89,33 @@ public class Connexion extends JFrame {
 		lblDatabase.setPreferredSize(d);
 
 		Dimension d2 = new Dimension(200, 28);
-		server.setPreferredSize(d2);
-		port.setPreferredSize(d2);
-		user.setPreferredSize(d2);
-		password.setPreferredSize(d2);
-		database.setPreferredSize(d2);
+		txtServer.setPreferredSize(d2);
+		txtPort.setPreferredSize(d2);
+		txtUser.setPreferredSize(d2);
+		txtPassword.setPreferredSize(d2);
+		txtDatabase.setPreferredSize(d2);
 
 		Box b0 = Box.createVerticalBox();
 
 		Box b1 = Box.createHorizontalBox();
 		b1.add(lblServer);
-		b1.add(server);
+		b1.add(txtServer);
 
 		Box b2 = Box.createHorizontalBox();
 		b2.add(lblPort);
-		b2.add(port);
+		b2.add(txtPort);
 
 		Box b3 = Box.createHorizontalBox();
 		b3.add(lblUser);
-		b3.add(user);
+		b3.add(txtUser);
 
 		Box b4 = Box.createHorizontalBox();
 		b4.add(lblPassword);
-		b4.add(password);
+		b4.add(txtPassword);
 
 		Box b5 = Box.createHorizontalBox();
 		b5.add(lblDatabase);
-		b5.add(database);
+		b5.add(txtDatabase);
 
 		b0.add(b1);
 		b0.add(b2);
