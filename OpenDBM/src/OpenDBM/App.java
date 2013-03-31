@@ -21,8 +21,6 @@ public class App {
 			}
 		}
 		m.disconnect();
-		
-		DataBaseManager d=new DataBaseManager();
-	}
-
+		DataBaseManager d = new DataBaseManager();
+	}	
 }
