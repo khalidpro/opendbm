@@ -30,6 +30,8 @@ public class DataBaseExplorer extends JPanel {
 		this.style.setClosedIcon(new ImageIcon("images/table.png"));
 		this.style.setOpenIcon(new ImageIcon("images/table.png"));
 		this.style.setLeafIcon(new ImageIcon("images/field.png"));
+		explorateur = new JTree();
+		explorateur.setCellRenderer(this.style);
 	}
 
 	public void CreateDatabaseTree(DataBase database) {
@@ -45,13 +47,11 @@ public class DataBaseExplorer extends JPanel {
 			}
 			root.add(node);
 		}
-		this.model = new DefaultTreeModel(root);
-		explorateur = new JTree();
+		this.model = new DefaultTreeModel(root);		
 		explorateur.setModel(model);
-		explorateur.setCellRenderer(this.style);
-		model.reload();
 		this.add(new JScrollPane(explorateur), BorderLayout.CENTER);
-		model.reload();
+		model.reload(root);
+		this.revalidate();
 		
 	}
 }
