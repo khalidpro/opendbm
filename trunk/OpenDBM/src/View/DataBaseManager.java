@@ -7,16 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import Schema.DataBase;
 
-public class DataBaseManager extends JFrame implements ActionListener {
+public class DataBaseManager extends JFrame {
 
 	public static DataBase db;
 	public static ToolBarre toolBar = new ToolBarre();
 	public static DataBaseExplorer databaseExplorer = new DataBaseExplorer();
 
 	public DataBaseManager() {
- 
+
 		this.setTitle("Open DBM 1.0");
-		this.setExtendedState(this.MAXIMIZED_BOTH);; // plien ecran
+		this.setExtendedState(this.MAXIMIZED_BOTH);
+		; // plien ecran
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setIconImage(getToolkit().getImage("images/icon.png"));
 		this.setJMenuBar(new Menu());
@@ -31,9 +32,4 @@ public class DataBaseManager extends JFrame implements ActionListener {
 
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-		System.out.println(e.getSource());
-	}
 }
