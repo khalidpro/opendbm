@@ -18,6 +18,7 @@ public class DataBaseManager extends JFrame implements ActionListener {
 		this.setTitle("Open DBM 1.0");
 		this.setExtendedState(this.MAXIMIZED_BOTH);; // plien ecran
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setIconImage(getToolkit().getImage("images/icon.png"));
 		this.setJMenuBar(new Menu());
 		this.getContentPane().add(toolBar, BorderLayout.NORTH);
 		this.getContentPane().add(databaseExplorer, BorderLayout.WEST);
