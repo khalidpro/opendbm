@@ -14,6 +14,7 @@ public class Splash extends JFrame{
 		this.setUndecorated(true); //  enlever la barre de titre 
 		this.setLocationRelativeTo(null);
 		this.setContentPane(new JLabel(new ImageIcon("images/background.png")));
+		this.setIconImage(getToolkit().getImage("images/icon.png"));
 		this.setVisible(true);
 	}
 }
