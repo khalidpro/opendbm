@@ -16,8 +16,7 @@ public class DataBaseManager extends JFrame {
 	public DataBaseManager() {
 
 		this.setTitle("Open DBM 1.0");
-		this.setExtendedState(this.MAXIMIZED_BOTH);
-		; // plien ecran
+		this.setExtendedState(this.MAXIMIZED_BOTH); // plien ecran
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setIconImage(getToolkit().getImage("images/icon.png"));
 		this.setJMenuBar(new Menu());
