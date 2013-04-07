@@ -1,14 +1,15 @@
 package OpenDBM;
 
 import View.DataBaseManager;
+import View.Splash;
 
 public class App {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
+		Splash s=new Splash();
+		Thread.sleep(2000);
+		s.setVisible(false);
 		DataBaseManager d = new DataBaseManager();
 	}	
 }
