@@ -3,10 +3,8 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import Schema.DataBase;
 
 public class DataBaseManager extends JFrame implements ActionListener {
