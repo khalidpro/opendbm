@@ -32,12 +32,12 @@ public class Connexion extends JFrame {
 
 	JButton con = new JButton("Connexion");
 
-	JPanel panMySQL = new JPanel();
+	JPanel panMySQL_Oracle = new JPanel();
 	JPanel panOracle = new JPanel();
 	JPanel panSQLServer = new JPanel();
 	JPanel panAccess = new JPanel();
 	JPanel panCenter = new JPanel();
-	
+
 	public Connexion() {
 		this.setSize(350, 270);
 		this.setLocationRelativeTo(null);
@@ -49,20 +49,20 @@ public class Connexion extends JFrame {
 		pan.add(liste_db);
 		this.getContentPane().add(pan, BorderLayout.NORTH);
 		this.getContentPane().add(panCenter, BorderLayout.CENTER);
-		panelMySQL();
+		panelMySQL_Oracle();
 		liste_db.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
 				String value = (String) liste_db.getSelectedItem();
 				panCenter.removeAll();
+				panMySQL_Oracle.removeAll();
+				panAccess.removeAll();
 				validate();
-				if (value == "MySQL") {
-					panelMySQL();
+				if (value == "MySQL" || value == "Oracle") {
+					panelMySQL_Oracle();
 				} else if (value == "SQL Server") {
 
-				} else if (value == "Oracle") {
-
-				} else if (value == "Access") {
+				}  else if (value == "Access") {
 					panelAccess();
 				}
 				pack();
@@ -95,7 +95,7 @@ public class Connexion extends JFrame {
 		this.setVisible(true);
 	}
 
-	private void panelMySQL() {
+	private void panelMySQL_Oracle() {
 		JTextField txtServer = new JTextField("localhost");
 		JTextField txtPort = new JTextField("3306");
 		JTextField txtUser = new JTextField("root");
@@ -151,9 +151,9 @@ public class Connexion extends JFrame {
 		b0.add(b4);
 		b0.add(b5);
 
-		panMySQL.add(b0);
-		panMySQL.setBorder(BorderFactory.createTitledBorder("MySQL"));
-		this.panCenter.add(panMySQL);
+		panMySQL_Oracle.add(b0);
+		panMySQL_Oracle.setBorder(BorderFactory.createTitledBorder("MySQL"));
+		this.panCenter.add(panMySQL_Oracle);
 	}
 
 	private void panelAccess() {
