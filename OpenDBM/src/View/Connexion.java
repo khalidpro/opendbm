@@ -31,7 +31,8 @@ public class Connexion extends JFrame {
 	JLabel type = new JLabel("Type de base de donnée :");
 
 	JButton con = new JButton("Connexion");
-
+	JTextField txtPath = new JTextField("");
+	
 	JPanel panMySQL_Oracle = new JPanel();
 	JPanel panOracle = new JPanel();
 	JPanel panSQLServer = new JPanel();
@@ -158,7 +159,7 @@ public class Connexion extends JFrame {
 
 	private void panelAccess() {
 
-		JTextField txtPath = new JTextField("");
+		
 		JTextField txtUser = new JTextField("");
 		JTextField txtPassword = new JTextField("");
 
@@ -170,13 +171,13 @@ public class Connexion extends JFrame {
 		btParcourir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				FileFilter mdb = new FiltreSimple("Fichiers Access", ".mdb");
+				FileFilter mdb = new FiltreSimple("Fichiers Access 2003", ".mdb");
+				FileFilter accdb = new FiltreSimple("Fichiers Access 2007/2010", ".accdb");
 				JFileChooser dialogue = new JFileChooser();
 				dialogue.addChoosableFileFilter(mdb);
+				dialogue.addChoosableFileFilter(accdb);
 				dialogue.showOpenDialog(null);
-
-				System.out.println("Fichier choisi : "
-						+ dialogue.getSelectedFile());
+				txtPath.setText( dialogue.getSelectedFile().toString());
 			}
 		});
 		Dimension d = new Dimension(100, 28);
