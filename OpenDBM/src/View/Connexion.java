@@ -4,15 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
 
 import Drivers.MySQL;
 import Schema.Column;
@@ -24,18 +29,6 @@ public class Connexion extends JFrame {
 	String[] base = { "MySQL", "Oracle", "SQL Server", "Access" };
 	JComboBox liste_db = new JComboBox(base);
 	JLabel type = new JLabel("Type de base de donnée :");
-
-	JTextField txtServer = new JTextField("localhost");
-	JTextField txtPort = new JTextField("3306");
-	JTextField txtUser = new JTextField("root");
-	JTextField txtPassword = new JTextField("");
-	JTextField txtDatabase = new JTextField("cabinet");
-
-	JLabel lblServer = new JLabel("Serveur :");
-	JLabel lblPort = new JLabel("Port  :");
-	JLabel lblUser = new JLabel("Utilisateur :");
-	JLabel lblPassword = new JLabel("Mot de passe :");
-	JLabel lblDatabase = new JLabel("Base de donnée :");
 
 	JButton con = new JButton("Connexion");
 
@@ -54,33 +47,68 @@ public class Connexion extends JFrame {
 		pan.add(type);
 		pan.add(liste_db);
 		this.getContentPane().add(pan, BorderLayout.NORTH);
+
 		this.panelMySQL();
-		this.getContentPane().add(con, BorderLayout.SOUTH);
 
-		con.addActionListener(new ActionListener() {
+		liste_db.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				DataBase db = new DataBase(txtDatabase.getText());			
-				MySQL m = new MySQL(db.getName());
-				m.connection();
-				for (Table tb : m.getTables()) {
-					
-					db.addTable(tb);
-					for (Column c : m.getColumns(tb)) {
-						tb.addColumns(c);
-					}
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String value = (String) liste_db.getSelectedItem();
+
+				if (value == "MySQL") {
+					getContentPane().remove(panAccess);
+					panelMySQL();
+				} else if (value == "SQL Server") {
+
+				} else if (value == "Oracle") {
+
+				} else if (value == "Access") {
+					getContentPane().remove(panMySQL);
+					panelAccess();
 				}
-				m.disconnect();
-				DataBaseManager.db = db;
-				DataBaseManager.databaseExplorer.CreateDatabaseTree(db);
-				dispose();
+				validate();
+				repaint();
 			}
 		});
+
+		// this.getContentPane().add(con, BorderLayout.SOUTH);
+		// con.addActionListener(new ActionListener() {
+
+		// public void actionPerformed(ActionEvent e) {
+		// DataBase db = new DataBase(txtDatabase.getText());
+		// MySQL m = new MySQL(db.getName());
+		// m.connection();
+		// for (Table tb : m.getTables()) {
+		//
+		// db.addTable(tb);
+		// for (Column c : m.getColumns(tb)) {
+		// tb.addColumns(c);
+		// }
+		// }
+		// m.disconnect();
+		// DataBaseManager.db = db;
+		// DataBaseManager.databaseExplorer.CreateDatabaseTree(db);
+		// dispose();
+		// }
+		// });
 
 		this.setVisible(true);
 	}
 
 	private void panelMySQL() {
+		JTextField txtServer = new JTextField("localhost");
+		JTextField txtPort = new JTextField("3306");
+		JTextField txtUser = new JTextField("root");
+		JTextField txtPassword = new JTextField("");
+		JTextField txtDatabase = new JTextField("cabinet");
+
+		JLabel lblServer = new JLabel("Serveur :");
+		JLabel lblPort = new JLabel("Port  :");
+		JLabel lblUser = new JLabel("Utilisateur :");
+		JLabel lblPassword = new JLabel("Mot de passe :");
+		JLabel lblDatabase = new JLabel("Base de donnée :");
+
 		Dimension d = new Dimension(140, 28);
 
 		lblServer.setPreferredSize(d);
@@ -126,7 +154,95 @@ public class Connexion extends JFrame {
 
 		panMySQL.add(b0);
 		panMySQL.setBorder(BorderFactory.createTitledBorder("MySQL"));
-
 		this.getContentPane().add(panMySQL, BorderLayout.CENTER);
+	}
+
+	private void panelAccess() {
+
+		JTextField txtPath = new JTextField("");
+		JTextField txtUser = new JTextField("");
+		JTextField txtPassword = new JTextField("");
+
+		JLabel lblPath = new JLabel("Path :");
+		JLabel lblUser = new JLabel("Utilisateur :");
+		JLabel lblPassword = new JLabel("Mot de passe :");
+
+		JButton btParcourir = new JButton("Parcourir");
+		btParcourir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				FileFilter mdb = new FiltreSimple("Fichiers Access", ".mdb");
+				JFileChooser dialogue = new JFileChooser();
+				dialogue.addChoosableFileFilter(mdb);
+				dialogue.showOpenDialog(null);
+
+				System.out.println("Fichier choisi : "
+						+ dialogue.getSelectedFile());
+			}
+		});
+		Dimension d = new Dimension(100, 28);
+
+		lblPath.setPreferredSize(d);
+		lblUser.setPreferredSize(d);
+		lblPassword.setPreferredSize(d);
+
+		Dimension d2 = new Dimension(200, 28);
+		txtPath.setPreferredSize(new Dimension(140, 28));
+		txtUser.setPreferredSize(d2);
+		txtPassword.setPreferredSize(d2);
+		Box b0 = Box.createVerticalBox();
+
+		Box b1 = Box.createHorizontalBox();
+		b1.add(lblPath);
+		b1.add(txtPath);
+		b1.add(btParcourir);
+
+		Box b2 = Box.createHorizontalBox();
+		b2.add(lblUser);
+		b2.add(txtUser);
+
+		Box b3 = Box.createHorizontalBox();
+		b3.add(lblPassword);
+		b3.add(txtPassword);
+
+		b0.add(b1);
+		b0.add(b2);
+		b0.add(b3);
+
+		panAccess.add(b0);
+		panAccess.setBorder(BorderFactory.createTitledBorder("Ms Access"));
+		this.getContentPane().add(panAccess, BorderLayout.CENTER);
+	}
+
+	// ///////////////////////////////////////Filter de la boite de
+	// dialogue/////////////////////////////////////////////////////////////////////
+
+	public class FiltreSimple extends FileFilter {
+		// Description et extension acceptée par le filtre
+		private String description;
+		private String extension;
+
+		// Constructeur à partir de la description et de l'extension acceptée
+		public FiltreSimple(String description, String extension) {
+			if (description == null || extension == null) {
+				throw new NullPointerException(
+						"La description (ou extension) ne peut être null.");
+			}
+			this.description = description;
+			this.extension = extension;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public boolean accept(File arg0) {
+			if (arg0.isDirectory()) {
+				return true;
+			}
+			String nomFichier = arg0.getName().toLowerCase();
+
+			return nomFichier.endsWith(extension);
+		}
 	}
 }

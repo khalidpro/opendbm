@@ -14,7 +14,6 @@ public class DataBaseManager extends JFrame {
 	public static DataBaseExplorer databaseExplorer = new DataBaseExplorer();
 
 	public DataBaseManager() {
-
 		this.setTitle("Open DBM 1.0");
 		this.setExtendedState(this.MAXIMIZED_BOTH); // plien ecran
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
