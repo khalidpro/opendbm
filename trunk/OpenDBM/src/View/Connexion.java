@@ -36,7 +36,8 @@ public class Connexion extends JFrame {
 	JPanel panOracle = new JPanel();
 	JPanel panSQLServer = new JPanel();
 	JPanel panAccess = new JPanel();
-
+	JPanel panCenter = new JPanel();
+	
 	public Connexion() {
 		this.setSize(350, 270);
 		this.setLocationRelativeTo(null);
@@ -47,32 +48,29 @@ public class Connexion extends JFrame {
 		pan.add(type);
 		pan.add(liste_db);
 		this.getContentPane().add(pan, BorderLayout.NORTH);
-
-		this.panelMySQL();
-
+		this.getContentPane().add(panCenter, BorderLayout.CENTER);
+		panelMySQL();
 		liste_db.addActionListener(new ActionListener() {
 
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String value = (String) liste_db.getSelectedItem();
-
+				panCenter.removeAll();
+				validate();
 				if (value == "MySQL") {
-					getContentPane().remove(panAccess);
 					panelMySQL();
 				} else if (value == "SQL Server") {
 
 				} else if (value == "Oracle") {
 
 				} else if (value == "Access") {
-					getContentPane().remove(panMySQL);
 					panelAccess();
 				}
+				pack();
 				validate();
-				repaint();
 			}
 		});
 
-		// this.getContentPane().add(con, BorderLayout.SOUTH);
+		this.getContentPane().add(con, BorderLayout.SOUTH);
 		// con.addActionListener(new ActionListener() {
 
 		// public void actionPerformed(ActionEvent e) {
@@ -93,6 +91,7 @@ public class Connexion extends JFrame {
 		// }
 		// });
 
+		this.pack();
 		this.setVisible(true);
 	}
 
@@ -154,7 +153,7 @@ public class Connexion extends JFrame {
 
 		panMySQL.add(b0);
 		panMySQL.setBorder(BorderFactory.createTitledBorder("MySQL"));
-		this.getContentPane().add(panMySQL, BorderLayout.CENTER);
+		this.panCenter.add(panMySQL);
 	}
 
 	private void panelAccess() {
@@ -211,7 +210,7 @@ public class Connexion extends JFrame {
 
 		panAccess.add(b0);
 		panAccess.setBorder(BorderFactory.createTitledBorder("Ms Access"));
-		this.getContentPane().add(panAccess, BorderLayout.CENTER);
+		this.panCenter.add(panAccess);
 	}
 
 	// ///////////////////////////////////////Filter de la boite de
