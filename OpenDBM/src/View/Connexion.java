@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
+import Drivers.IDriver;
+import Drivers.Manager;
 import Drivers.MySQL;
 import Schema.Column;
 import Schema.DataBase;
@@ -32,7 +34,7 @@ public class Connexion extends JFrame {
 
 	JButton con = new JButton("Connexion");
 	JTextField txtPath = new JTextField("");
-	
+
 	JPanel panMySQL_Oracle = new JPanel();
 	JPanel panOracle = new JPanel();
 	JPanel panSQLServer = new JPanel();
@@ -63,7 +65,7 @@ public class Connexion extends JFrame {
 					panelMySQL_Oracle();
 				} else if (value == "SQL Server") {
 
-				}  else if (value == "Access") {
+				} else if (value == "Access") {
 					panelAccess();
 				}
 				pack();
@@ -72,25 +74,27 @@ public class Connexion extends JFrame {
 		});
 
 		this.getContentPane().add(con, BorderLayout.SOUTH);
-		// con.addActionListener(new ActionListener() {
+		con.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String value = (String) liste_db.getSelectedItem();
+				IDriver driver;
+				if (value == "MySQL") {
+					// driver=new MySQL();
+				} else if (value == "SQL Server") {
+					// driver=new SQLServer();
+				} else if (value == "Access") {
+					// driver=new Access();
+				} else if (value == "Oracle") {
+					// driver=new Oracle();
+				}
+//				Manager m = new Manager(driver);
+//				DataBaseManager.db = m.getSchema();
+//				DataBaseManager.databaseExplorer
+//						.CreateDatabaseTree(DataBaseManager.db);
+//				dispose();
 
-		// public void actionPerformed(ActionEvent e) {
-		// DataBase db = new DataBase(txtDatabase.getText());
-		// MySQL m = new MySQL(db.getName());
-		// m.connection();
-		// for (Table tb : m.getTables()) {
-		//
-		// db.addTable(tb);
-		// for (Column c : m.getColumns(tb)) {
-		// tb.addColumns(c);
-		// }
-		// }
-		// m.disconnect();
-		// DataBaseManager.db = db;
-		// DataBaseManager.databaseExplorer.CreateDatabaseTree(db);
-		// dispose();
-		// }
-		// });
+			}
+		});
 
 		this.pack();
 		this.setVisible(true);
@@ -159,26 +163,27 @@ public class Connexion extends JFrame {
 
 	private void panelAccess() {
 
-		
 		JTextField txtUser = new JTextField("");
 		JTextField txtPassword = new JTextField("");
 
 		JLabel lblPath = new JLabel("Path :");
 		JLabel lblUser = new JLabel("Utilisateur :");
 		JLabel lblPassword = new JLabel("Mot de passe :");
-		
-// Parcourir ==========================================
+
+		// Parcourir ==========================================
 		JButton btParcourir = new JButton("Parcourir");
 		btParcourir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				FileFilter mdb = new FiltreSimple("Fichiers Access 2003", ".mdb");
-				FileFilter accdb = new FiltreSimple("Fichiers Access 2007/2010", ".accdb");
+				FileFilter mdb = new FiltreSimple("Fichiers Access 2003",
+						".mdb");
+				FileFilter accdb = new FiltreSimple(
+						"Fichiers Access 2007/2010", ".accdb");
 				JFileChooser dialogue = new JFileChooser();
 				dialogue.addChoosableFileFilter(mdb);
 				dialogue.addChoosableFileFilter(accdb);
 				dialogue.showOpenDialog(null);
-				txtPath.setText( dialogue.getSelectedFile().toString());
+				txtPath.setText(dialogue.getSelectedFile().toString());
 			}
 		});
 		Dimension d = new Dimension(100, 28);
