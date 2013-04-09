@@ -10,9 +10,11 @@ import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileFilter;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -94,5 +96,47 @@ public class Menu extends JMenuBar {
 			}
 		});
 
+		// Enregistrer ======================================
+		enregistre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser c = new JFileChooser();
+				int rVal = c.showSaveDialog(c);
+				if (rVal == JFileChooser.APPROVE_OPTION) {
+					String adressedufichier = c.getCurrentDirectory()
+							.toString()
+							+ "/"
+							+ c.getSelectedFile().getName()
+							+ ".sql";
+
+					try {
+
+						FileWriter fw = new FileWriter(adressedufichier, true);
+
+						// le BufferedWriter output auquel on donne comme
+						// argument le
+						// FileWriter fw cree juste au dessus
+						BufferedWriter output = new BufferedWriter(fw);
+
+						// on marque dans le fichier ou plutot dans le
+						// BufferedWriter qui
+						// sert comme un tampon(stream)
+						output.write(DataBaseManager.queryEditor.editeur
+								.getText());
+						// on peut utiliser plusieurs fois methode write
+						output.flush();
+						// ensuite flush envoie dans le fichier, ne pas oublier
+						// cette
+						// methode pour le BufferedWriter
+						output.close();
+						// et on le ferme
+						System.out.println("fichier créé");
+					} catch (IOException ioe) {
+						System.out.print("Erreur : ");
+						ioe.printStackTrace();
+					}
+				}
+			}
+		});
 	}
+
 }
