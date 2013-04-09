@@ -166,7 +166,8 @@ public class Connexion extends JFrame {
 		JLabel lblPath = new JLabel("Path :");
 		JLabel lblUser = new JLabel("Utilisateur :");
 		JLabel lblPassword = new JLabel("Mot de passe :");
-
+		
+// Parcourir ==========================================
 		JButton btParcourir = new JButton("Parcourir");
 		btParcourir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -214,35 +215,4 @@ public class Connexion extends JFrame {
 		this.panCenter.add(panAccess);
 	}
 
-	// ///////////////////////////////////////Filter de la boite de
-	// dialogue/////////////////////////////////////////////////////////////////////
-
-	public class FiltreSimple extends FileFilter {
-		// Description et extension acceptée par le filtre
-		private String description;
-		private String extension;
-
-		// Constructeur à partir de la description et de l'extension acceptée
-		public FiltreSimple(String description, String extension) {
-			if (description == null || extension == null) {
-				throw new NullPointerException(
-						"La description (ou extension) ne peut être null.");
-			}
-			this.description = description;
-			this.extension = extension;
-		}
-
-		public String getDescription() {
-			return description;
-		}
-
-		public boolean accept(File arg0) {
-			if (arg0.isDirectory()) {
-				return true;
-			}
-			String nomFichier = arg0.getName().toLowerCase();
-
-			return nomFichier.endsWith(extension);
-		}
-	}
 }
