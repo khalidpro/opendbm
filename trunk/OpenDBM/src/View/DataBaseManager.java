@@ -12,7 +12,7 @@ public class DataBaseManager extends JFrame {
 	public static DataBase db;
 	public static ToolBarre toolBar = new ToolBarre();
 	public static DataBaseExplorer databaseExplorer = new DataBaseExplorer();
-
+	public static  QueryEditor queryEditor =new QueryEditor();
 	public DataBaseManager() {
 		this.setTitle("Open DBM 1.0");
 		this.setExtendedState(this.MAXIMIZED_BOTH); // plien ecran
@@ -23,7 +23,7 @@ public class DataBaseManager extends JFrame {
 		this.getContentPane().add(databaseExplorer, BorderLayout.WEST);
 		JPanel pan = new JPanel();
 		pan.setLayout(new BorderLayout());
-		pan.add(new QueryEditor(), BorderLayout.CENTER);
+		pan.add(queryEditor, BorderLayout.CENTER);
 		pan.add(new QueryResults(), BorderLayout.SOUTH);
 		this.getContentPane().add(pan, BorderLayout.CENTER);
 		this.setVisible(true);
