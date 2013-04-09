@@ -18,11 +18,9 @@ public class FiltreSimple extends FileFilter {
 		this.description = description;
 		this.extension = extension;
 	}
-
 	public String getDescription() {
 		return description;
 	}
-
 	public boolean accept(File arg0) {
 		if (arg0.isDirectory()) {
 			return true;
