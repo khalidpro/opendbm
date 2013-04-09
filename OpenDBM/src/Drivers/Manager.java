@@ -10,15 +10,12 @@ public class Manager {
 	public Manager(IDriver driver) {
 		this.driver = driver;
 	}
-
 	public IDriver getDriver() {
 		return driver;
 	}
-
 	public void setDriver(IDriver driver) {
 		this.driver = driver;
 	}
-
 	public DataBase getSchema() {
 		DataBase db = new DataBase(driver.getDatabaseName());
 		MySQL m = new MySQL(db.getName());
