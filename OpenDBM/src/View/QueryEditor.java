@@ -18,6 +18,7 @@ public class QueryEditor extends JPanel {
 		editeur.setFont(font);
 		this.setBorder(BorderFactory.createTitledBorder("Editeur de requête:"));
 		this.add(scroll, BorderLayout.CENTER);
-
 	}
+	
+	
 }
