@@ -68,8 +68,8 @@ public class MySQL implements IDriver {
 		ArrayList<Column> columns = new ArrayList<Column>();
 		try {
 			this.stmt = this.con.createStatement();
-			rs = this.stmt.executeQuery("SHOW COLUMNS FROM "
-					+ table.toString());
+			rs = this.stmt
+					.executeQuery("SHOW COLUMNS FROM " + table.toString());
 			while (rs.next()) {
 				columns.add(new Column(rs.getString(1), rs.getString(2)));
 			}
@@ -79,6 +79,10 @@ public class MySQL implements IDriver {
 			e.printStackTrace();
 		}
 		return columns;
+	}
+
+	public String getDatabaseName() {
+		return this.DataBaseName;
 	}
 
 }
