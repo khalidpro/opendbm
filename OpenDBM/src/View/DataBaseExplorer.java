@@ -11,7 +11,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 
-
 import Schema.Column;
 import Schema.DataBase;
 import Schema.Table;
@@ -25,7 +24,7 @@ public class DataBaseExplorer extends JPanel {
 
 	public DataBaseExplorer() {
 		this.setLayout(new BorderLayout());
-		//this.setPreferredSize(new Dimension(250, 700));
+		// this.setPreferredSize(new Dimension(250, 700));
 		this.setBorder(BorderFactory.createTitledBorder("Explorateur BD:"));
 		this.style.setClosedIcon(new ImageIcon("images/table.png"));
 		this.style.setOpenIcon(new ImageIcon("images/table.png"));
@@ -35,6 +34,7 @@ public class DataBaseExplorer extends JPanel {
 	}
 
 	public void CreateDatabaseTree(DataBase database) {
+		explorateur.removeAll();
 		root = new DefaultMutableTreeNode(database.getName());
 		for (Table table : database.getTables()) {
 			DefaultMutableTreeNode node = new DefaultMutableTreeNode(
@@ -47,11 +47,11 @@ public class DataBaseExplorer extends JPanel {
 			}
 			root.add(node);
 		}
-		this.model = new DefaultTreeModel(root);		
+		this.model = new DefaultTreeModel(root);
 		explorateur.setModel(model);
 		this.add(new JScrollPane(explorateur), BorderLayout.CENTER);
 		model.reload(root);
 		this.revalidate();
-		
+
 	}
 }

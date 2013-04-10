@@ -12,16 +12,20 @@ import Schema.Table;
 
 public class MySQL implements IDriver {
 
-	private String server = "localhost";
-	private int port = 3306;
-	private String user = "root";
-	private String passWord = "";
+	private String server;
+	private int port;
+	private String user;
+	private String passWord;
 	private Connection con = null;
 	private Statement stmt = null;
 	private ResultSet rs = null;
 	private String DataBaseName;
 
-	public MySQL(String dataBaseName) {
+	public MySQL(String server,int port,String user,String pw,String dataBaseName) {
+		this.server=server;
+		this.port=port;
+		this.user=user;
+		this.passWord=pw;
 		this.DataBaseName = dataBaseName;
 	}
 

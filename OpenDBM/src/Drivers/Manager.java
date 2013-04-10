@@ -10,23 +10,25 @@ public class Manager {
 	public Manager(IDriver driver) {
 		this.driver = driver;
 	}
+
 	public IDriver getDriver() {
 		return driver;
 	}
+
 	public void setDriver(IDriver driver) {
 		this.driver = driver;
 	}
+
 	public DataBase getSchema() {
 		DataBase db = new DataBase(driver.getDatabaseName());
-		MySQL m = new MySQL(db.getName());
-		m.connection();
+		driver.connection();
 		for (Table tb : this.driver.getTables()) {
 			db.addTable(tb);
 			for (Column c : this.driver.getColumns(tb)) {
 				tb.addColumns(c);
 			}
 		}
-		m.disconnect();
+		driver.disconnect();
 		return db;
 	}
 }
