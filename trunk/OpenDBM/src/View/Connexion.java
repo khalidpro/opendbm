@@ -19,9 +19,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
+import Drivers.Access;
 import Drivers.IDriver;
 import Drivers.Manager;
 import Drivers.MySQL;
+import Drivers.Oracle;
+import Drivers.SQLServer;
 import Schema.Column;
 import Schema.DataBase;
 import Schema.Table;
@@ -33,7 +36,8 @@ public class Connexion extends JFrame {
 	JLabel type = new JLabel("Type de base de donnée :");
 
 	JButton con = new JButton("Connexion");
-	JTextField txtPath = new JTextField("");
+
+	JTextField txtServer, txtPort, txtUser, txtPassword, txtDatabase, txtPath;
 
 	JPanel panMySQL_Oracle = new JPanel();
 	JPanel panOracle = new JPanel();
@@ -77,22 +81,23 @@ public class Connexion extends JFrame {
 		con.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String value = (String) liste_db.getSelectedItem();
-				IDriver driver;
+				IDriver driver = null;
 				if (value == "MySQL") {
-					// driver=new MySQL();
+					driver = new MySQL(txtServer.getText(), Integer
+							.parseInt(txtPort.getText()), txtUser.getText(),
+							txtPassword.getText(), txtDatabase.getText());
 				} else if (value == "SQL Server") {
-					// driver=new SQLServer();
+					driver = new SQLServer();
 				} else if (value == "Access") {
-					// driver=new Access();
+					driver = new Access();
 				} else if (value == "Oracle") {
-					// driver=new Oracle();
+					driver = new Oracle();
 				}
-//				Manager m = new Manager(driver);
-//				DataBaseManager.db = m.getSchema();
-//				DataBaseManager.databaseExplorer
-//						.CreateDatabaseTree(DataBaseManager.db);
-//				dispose();
-
+				Manager m = new Manager(driver);
+				DataBaseManager.db = m.getSchema();
+				DataBaseManager.databaseExplorer
+						.CreateDatabaseTree(DataBaseManager.db);
+				dispose();
 			}
 		});
 
@@ -101,11 +106,11 @@ public class Connexion extends JFrame {
 	}
 
 	private void panelMySQL_Oracle() {
-		JTextField txtServer = new JTextField("localhost");
-		JTextField txtPort = new JTextField("3306");
-		JTextField txtUser = new JTextField("root");
-		JTextField txtPassword = new JTextField("");
-		JTextField txtDatabase = new JTextField("cabinet");
+		txtServer = new JTextField("localhost");
+		txtPort = new JTextField("3306");
+		txtUser = new JTextField("root");
+		txtPassword = new JTextField("");
+		txtDatabase = new JTextField("cabinet");
 
 		JLabel lblServer = new JLabel("Serveur :");
 		JLabel lblPort = new JLabel("Port  :");
@@ -162,9 +167,9 @@ public class Connexion extends JFrame {
 	}
 
 	private void panelAccess() {
-
-		JTextField txtUser = new JTextField("");
-		JTextField txtPassword = new JTextField("");
+		txtPath = new JTextField("");
+		txtUser = new JTextField("");
+		txtPassword = new JTextField("");
 
 		JLabel lblPath = new JLabel("Path :");
 		JLabel lblUser = new JLabel("Utilisateur :");
