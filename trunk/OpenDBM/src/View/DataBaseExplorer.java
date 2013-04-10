@@ -34,7 +34,7 @@ public class DataBaseExplorer extends JPanel {
 	}
 
 	public void CreateDatabaseTree(DataBase database) {
-		explorateur.removeAll();
+		this.removeAll();
 		root = new DefaultMutableTreeNode(database.getName());
 		for (Table table : database.getTables()) {
 			DefaultMutableTreeNode node = new DefaultMutableTreeNode(
