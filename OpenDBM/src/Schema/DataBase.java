@@ -2,7 +2,7 @@ package Schema;
 
 import java.util.ArrayList;
 
-public class DataBase {
+public class DataBase implements ISql{
 	private String name;
 	private ArrayList<Table> tables = new ArrayList<Table>();
 
@@ -28,6 +28,16 @@ public class DataBase {
 
 	public String toString() {
 		return this.name;
+	}
+	
+	public String getSQL() {
+		String str="-- Base de données: `"+ this.name+ "`\n";
+		str=str+"-------------------------------------------";
+		for(Table tab:this.tables)
+		{
+			str=str+tab.getSQL()+"\n";		
+		}
+		return str;
 	}
 
 }

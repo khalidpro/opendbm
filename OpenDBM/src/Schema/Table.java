@@ -2,7 +2,7 @@ package Schema;
 
 import java.util.ArrayList;
 
-public class Table {
+public class Table implements ISql{
 	private String name;
 	private ArrayList<Column> columns = new ArrayList<Column>();
 
@@ -29,6 +29,17 @@ public class Table {
 
 	public String toString() {
 		return this.name;
+	}
+
+	public String getSQL() {
+
+		String str="CREATE TABLE IF NOT EXISTS '"+this.name+"' (\n";
+		for(Column col:this.columns)
+		{
+			str=str+col.getSQL()+"\n";		
+		}
+		str=str+"); \n";
+		return str;
 	}
 
 }

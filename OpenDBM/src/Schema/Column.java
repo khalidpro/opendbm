@@ -1,6 +1,6 @@
 package Schema;
 
-public class Column {
+public class Column implements ISql {
 	private String name;
 	private String type;
 	private boolean primaryKey = false;
@@ -55,6 +55,15 @@ public class Column {
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	@Override
+	public String getSQL() {
+		String str = "";
+		str = this.name + " " + this.type;
+		str = this.notNull ? str + " NOT NULL" : str;
+		str = str + " ,";
+		return str;
 	}
 
 }
