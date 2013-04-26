@@ -33,10 +33,10 @@ public class Table implements ISql{
 
 	public String getSQL() {
 
-		String str="CREATE TABLE IF NOT EXISTS '"+this.name+"' (\n";
+		String str="CREATE TABLE '"+this.name+"' (\n";
 		for(Column col:this.columns)
 		{
-			str=str+col.getSQL()+"\n";		
+			str=str+"\t"+col.getSQL()+"\n";		
 		}
 		str=str+"); \n";
 		return str;

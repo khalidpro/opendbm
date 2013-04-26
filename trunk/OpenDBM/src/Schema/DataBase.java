@@ -31,8 +31,10 @@ public class DataBase implements ISql{
 	}
 	
 	public String getSQL() {
-		String str="-- Base de données: `"+ this.name+ "`\n";
-		str=str+"-------------------------------------------";
+		String str="";
+		str=str+"-------------------------------------------\n";
+		str=str+"-- Base de données: `"+ this.name+ "`\n";
+		str=str+"-------------------------------------------\n\n";
 		for(Table tab:this.tables)
 		{
 			str=str+tab.getSQL()+"\n";		
