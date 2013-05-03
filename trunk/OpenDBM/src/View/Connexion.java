@@ -110,7 +110,7 @@ public class Connexion extends JFrame {
 		txtPort = new JTextField("3306");
 		txtUser = new JTextField("root");
 		txtPassword = new JTextField("");
-		txtDatabase = new JTextField("cabinet");
+		txtDatabase = new JTextField("test");
 
 		JLabel lblServer = new JLabel("Serveur :");
 		JLabel lblPort = new JLabel("Port  :");

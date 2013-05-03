@@ -21,11 +21,12 @@ public class MySQL implements IDriver {
 	private ResultSet rs = null;
 	private String DataBaseName;
 
-	public MySQL(String server,int port,String user,String pw,String dataBaseName) {
-		this.server=server;
-		this.port=port;
-		this.user=user;
-		this.passWord=pw;
+	public MySQL(String server, int port, String user, String pw,
+			String dataBaseName) {
+		this.server = server;
+		this.port = port;
+		this.user = user;
+		this.passWord = pw;
 		this.DataBaseName = dataBaseName;
 	}
 
@@ -75,8 +76,14 @@ public class MySQL implements IDriver {
 			rs = this.stmt
 					.executeQuery("SHOW COLUMNS FROM " + table.toString());
 			while (rs.next()) {
-				columns.add(new Column(rs.getString(1), rs.getString(2)));
+				Column col = new Column(rs.getString(1), rs.getString(2));
+
+				if (rs.getString(4).equals("PRI")) {
+					col.setPrimaryKey(true);
+				}
+				columns.add(col);
 			}
+
 			this.stmt.close();
 			this.rs.close();
 		} catch (SQLException e) {
