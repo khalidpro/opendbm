@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.ResultSetMetaData;
+
 import Schema.Column;
 import Schema.Row;
 import Schema.Table;
@@ -105,8 +107,14 @@ public class MySQL implements IDriver {
 			this.stmt = this.con.createStatement();
 			rs = this.stmt.executeQuery(query);
 			while (rs.next()) {
-				Row r=new Row();
-			
+				Row r = new Row();
+				ResultSetMetaData rsMetaData = (ResultSetMetaData) rs
+						.getMetaData();
+				int numberOfColumns = rsMetaData.getColumnCount();
+				for (int i = 1; i < numberOfColumns + 1; i++) {
+					String columnName = rsMetaData.getColumnName(i);
+					r.addField(columnName, rs.getString(i));
+				}
 				rows.add(r);
 			}
 			this.stmt.close();

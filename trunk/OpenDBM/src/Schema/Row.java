@@ -8,7 +8,10 @@ public class Row {
 	public void addField(String name, String value) {
 		Fields.add(new Field(name, value));
 	}
-
+	public int getFieldsCount()
+	{
+		return Fields.size();
+	}
 	class Field {
 		private String name;
 		private String value;
