@@ -2,6 +2,7 @@ package Drivers;
 
 import java.util.ArrayList;
 import Schema.Column;
+import Schema.Row;
 import Schema.Table;
 
 public interface IDriver {	
@@ -10,4 +11,5 @@ public interface IDriver {
 	public String getDatabaseName();
 	public ArrayList<Table> getTables();
 	public ArrayList<Column> getColumns(Table table);
+	public ArrayList<Row> getResultat(String query);
 }

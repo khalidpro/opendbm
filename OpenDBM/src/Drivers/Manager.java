@@ -1,7 +1,10 @@
 package Drivers;
 
+import java.util.ArrayList;
+
 import Schema.Column;
 import Schema.DataBase;
+import Schema.Row;
 import Schema.Table;
 
 public class Manager {
@@ -30,5 +33,12 @@ public class Manager {
 		}
 		driver.disconnect();
 		return db;
+	}
+	public ArrayList<Row> getResultat(String query)
+	{
+		driver.connection();
+		
+		driver.disconnect();
+		return null;
 	}
 }

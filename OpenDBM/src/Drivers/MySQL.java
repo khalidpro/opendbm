@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Schema.Column;
+import Schema.Row;
 import Schema.Table;
 
 public class MySQL implements IDriver {
@@ -94,6 +95,26 @@ public class MySQL implements IDriver {
 
 	public String getDatabaseName() {
 		return this.DataBaseName;
+	}
+
+	@Override
+	public ArrayList<Row> getResultat(String query) {
+
+		ArrayList<Row> rows = new ArrayList<Row>();
+		try {
+			this.stmt = this.con.createStatement();
+			rs = this.stmt.executeQuery(query);
+			while (rs.next()) {
+				Row r=new Row();
+			
+				rows.add(r);
+			}
+			this.stmt.close();
+			this.rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rows;
 	}
 
 }

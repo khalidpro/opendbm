@@ -13,6 +13,8 @@ public class DataBaseManager extends JFrame {
 	public static ToolBarre toolBar = new ToolBarre();
 	public static DataBaseExplorer databaseExplorer = new DataBaseExplorer();
 	public static QueryEditor queryEditor =new QueryEditor();
+	
+	
 	public DataBaseManager() {
 		this.setTitle("Open DBM 1.0");
 		this.setExtendedState(this.MAXIMIZED_BOTH); // plien ecran
