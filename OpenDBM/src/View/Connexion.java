@@ -93,8 +93,8 @@ public class Connexion extends JFrame {
 				} else if (value == "Oracle") {
 					driver = new Oracle();
 				}
-				Manager m = new Manager(driver);
-				DataBaseManager.db = m.getSchema();
+				DataBaseManager.manager = new Manager(driver);
+				DataBaseManager.db = DataBaseManager.manager.getSchema();
 				DataBaseManager.databaseExplorer
 						.CreateDatabaseTree(DataBaseManager.db);
 				dispose();

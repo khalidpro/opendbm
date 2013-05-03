@@ -5,11 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Drivers.Manager;
 import Schema.DataBase;
 
 public class DataBaseManager extends JFrame {
 
 	public static DataBase db;
+	public static Manager manager=null;
 	public static ToolBarre toolBar = new ToolBarre();
 	public static DataBaseExplorer databaseExplorer = new DataBaseExplorer();
 	public static QueryEditor queryEditor =new QueryEditor();
