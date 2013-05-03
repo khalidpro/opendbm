@@ -12,8 +12,9 @@ public class ToolBarre extends JToolBar {
 	JButton nouveau = new JButton(new ImageIcon("images/file_new.png"));
 	JButton enregistre = new JButton(new ImageIcon("images/save.png"));
 	JButton connexion = new JButton(new ImageIcon("images/connect.png"));
+	JButton executer = new JButton(new ImageIcon("images/executer.png"));
 	JButton sql = new JButton("SQL");
-	JButton xml = new JButton("XML");
+
 
 	public ToolBarre() {
 		this.add(connexion);
@@ -33,6 +34,7 @@ public class ToolBarre extends JToolBar {
 				DataBaseManager.queryEditor.editeur.setText(DataBaseManager.db.getSQL());
 			}
 		});
-		this.add(xml);
+
+		this.add(executer);
 	}
 }
