@@ -6,6 +6,7 @@ public class Column implements ISql {
 	private boolean primaryKey = false;
 	private boolean unique = false;
 	private boolean notNull = false;
+	private String foreignKey= "";
 
 	public Column(String name, String type) {
 		this.name = name;
@@ -14,6 +15,14 @@ public class Column implements ISql {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getForeignKey() {
+		return foreignKey;
+	}
+
+	public void setForeignKey(String foreignKey) {
+		this.foreignKey = foreignKey;
 	}
 
 	public void setName(String name) {

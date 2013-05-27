@@ -75,7 +75,7 @@ public class MySQL implements IDriver {
 	public ArrayList<Column> getColumns(Table table) {
 		ArrayList<Column> columns = new ArrayList<Column>();
 		try {
-			String requete = "SELECT k.CONSTRAINT_SCHEMA, k.CONSTRAINT_NAME, k.TABLE_NAME, k.COLUMN_NAME , k.REFERENCED_TABLE_SCHEMA, k.REFERENCED_TABLE_NAME, k.REFERENCED_COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS c ON k.CONSTRAINT_SCHEMA = c.CONSTRAINT_SCHEMA AND k.CONSTRAINT_NAME = c.CONSTRAINT_NAME WHERE k.TABLE_NAME='"
+			String requete = "SELECT DISTINCT  k.CONSTRAINT_SCHEMA, k.CONSTRAINT_NAME, k.TABLE_NAME, k.COLUMN_NAME , k.REFERENCED_TABLE_SCHEMA, k.REFERENCED_TABLE_NAME, k.REFERENCED_COLUMN_NAME, c.CONSTRAINT_TYPE FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS c ON k.CONSTRAINT_SCHEMA = c.CONSTRAINT_SCHEMA AND k.CONSTRAINT_NAME = c.CONSTRAINT_NAME WHERE k.TABLE_NAME='"
 					+ table.getName()
 					+ "' and k.CONSTRAINT_SCHEMA='"
 					+ this.DataBaseName + "';";
@@ -85,17 +85,33 @@ public class MySQL implements IDriver {
 					.executeQuery("SHOW COLUMNS FROM " + table.toString());
 			while (rs.next()) {
 				Column col = new Column(rs.getString(1), rs.getString(2));
-
-				if (rs.getString(4).equals("PRI")) {
-					col.setPrimaryKey(true);
-				}
 				columns.add(col);
 			}
 
 			// *********************************************************************************
 			rs = this.stmt.executeQuery(requete);
 			while (rs.next()) {
-				System.out.println(rs.getString(3));
+				for( int i=0;i<columns.size();i++)
+				{
+					if(columns.get(i).getName().equals(rs.getString("COLUMN_NAME")))
+					{
+						if(rs.getString("CONSTRAINT_TYPE").equals("UNIQUE"))
+						{
+							columns.get(i).setUnique(true);
+						}
+						else if (rs.getString("CONSTRAINT_TYPE").equals("PRIMARY KEY"))
+						{
+							columns.get(i).setPrimaryKey(true);
+						}
+						else if (rs.getString("CONSTRAINT_TYPE").equals("FOREIGN KEY"))
+						{
+							columns.get(i).setForeignKey(rs.getString("REFERENCED_TABLE_NAME") + " (" + rs.getString("REFERENCED_COLUMN_NAME")+")");
+						}
+						else {
+							
+						}
+					}
+				}
 
 			}
 
