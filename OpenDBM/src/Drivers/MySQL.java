@@ -75,6 +75,11 @@ public class MySQL implements IDriver {
 	public ArrayList<Column> getColumns(Table table) {
 		ArrayList<Column> columns = new ArrayList<Column>();
 		try {
+			String requete = "SELECT k.CONSTRAINT_SCHEMA, k.CONSTRAINT_NAME, k.TABLE_NAME, k.COLUMN_NAME , k.REFERENCED_TABLE_SCHEMA, k.REFERENCED_TABLE_NAME, k.REFERENCED_COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS k INNER JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS c ON k.CONSTRAINT_SCHEMA = c.CONSTRAINT_SCHEMA AND k.CONSTRAINT_NAME = c.CONSTRAINT_NAME WHERE k.TABLE_NAME='"
+					+ table.getName()
+					+ "' and k.CONSTRAINT_SCHEMA='"
+					+ this.DataBaseName + "';";
+
 			this.stmt = this.con.createStatement();
 			rs = this.stmt
 					.executeQuery("SHOW COLUMNS FROM " + table.toString());
@@ -87,8 +92,16 @@ public class MySQL implements IDriver {
 				columns.add(col);
 			}
 
+			// *********************************************************************************
+			rs = this.stmt.executeQuery(requete);
+			while (rs.next()) {
+				System.out.println(rs.getString(3));
+
+			}
+
 			this.stmt.close();
 			this.rs.close();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
