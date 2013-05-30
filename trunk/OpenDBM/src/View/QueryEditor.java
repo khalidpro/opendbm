@@ -51,7 +51,10 @@ public class QueryEditor extends JPanel {
 			}
 		});
 	}
-
+	public String getEditeurText()
+	{
+		return this.editeur.getText();
+	}
 	class SQLHighlight {
 		private String[] strsToHighlight = { "SELECT", "UPDATE", "DELETE",
 				"FROM", "WHERE", "AND", "OR", "SET", "USE", "SHOW", "DROP",

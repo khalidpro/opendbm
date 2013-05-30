@@ -12,6 +12,14 @@ public class Row {
 	{
 		return Fields.size();
 	}
+	public String getFieldName(int index)
+	{
+		return Fields.get(index).name;
+	}
+	public String getFieldValue(int index)
+	{
+		return Fields.get(index).value;
+	}
 	class Field {
 		private String name;
 		private String value;

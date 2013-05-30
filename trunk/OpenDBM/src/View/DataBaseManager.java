@@ -16,7 +16,7 @@ public class DataBaseManager extends JFrame {
 	public static ToolBarre toolBar = new ToolBarre();
 	public static DataBaseExplorer databaseExplorer = new DataBaseExplorer();
 	public static QueryEditor queryEditor =new QueryEditor();
-	
+	public static QueryResults queryResults =new QueryResults();
 	
 	public DataBaseManager() {
 		this.setTitle("Open DBM 1.0");
@@ -29,7 +29,7 @@ public class DataBaseManager extends JFrame {
 		JPanel pan = new JPanel();
 		pan.setLayout(new BorderLayout());
 		pan.add(queryEditor, BorderLayout.CENTER);
-		pan.add(new QueryResults(), BorderLayout.SOUTH);
+		pan.add(queryResults, BorderLayout.SOUTH);
 		this.getContentPane().add(pan, BorderLayout.CENTER);
 		this.setVisible(true);
 
