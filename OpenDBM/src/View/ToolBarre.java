@@ -2,10 +2,14 @@ package View;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
+import javax.xml.crypto.Data;
+
+import Schema.Row;
 
 public class ToolBarre extends JToolBar {
 
@@ -14,7 +18,6 @@ public class ToolBarre extends JToolBar {
 	JButton connexion = new JButton(new ImageIcon("images/connect.png"));
 	JButton executer = new JButton(new ImageIcon("images/executer.png"));
 	JButton sql = new JButton("SQL");
-
 
 	public ToolBarre() {
 		this.add(connexion);
@@ -38,7 +41,8 @@ public class ToolBarre extends JToolBar {
 		this.add(executer);
 		executer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
+				DataBaseManager.queryResults.setResults(DataBaseManager.manager.getResultat(DataBaseManager.queryEditor.getEditeurText()));
 			}
 		});
 	}

@@ -91,24 +91,24 @@ public class MySQL implements IDriver {
 			// *********************************************************************************
 			rs = this.stmt.executeQuery(requete);
 			while (rs.next()) {
-				for( int i=0;i<columns.size();i++)
-				{
-					if(columns.get(i).getName().equals(rs.getString("COLUMN_NAME")))
-					{
-						if(rs.getString("CONSTRAINT_TYPE").equals("UNIQUE"))
-						{
+				for (int i = 0; i < columns.size(); i++) {
+					if (columns.get(i).getName()
+							.equals(rs.getString("COLUMN_NAME"))) {
+						if (rs.getString("CONSTRAINT_TYPE").equals("UNIQUE")) {
 							columns.get(i).setUnique(true);
-						}
-						else if (rs.getString("CONSTRAINT_TYPE").equals("PRIMARY KEY"))
-						{
+						} else if (rs.getString("CONSTRAINT_TYPE").equals(
+								"PRIMARY KEY")) {
 							columns.get(i).setPrimaryKey(true);
-						}
-						else if (rs.getString("CONSTRAINT_TYPE").equals("FOREIGN KEY"))
-						{
-							columns.get(i).setForeignKey(rs.getString("REFERENCED_TABLE_NAME") + " (" + rs.getString("REFERENCED_COLUMN_NAME")+")");
-						}
-						else {
-							
+						} else if (rs.getString("CONSTRAINT_TYPE").equals(
+								"FOREIGN KEY")) {
+							columns.get(i)
+									.setForeignKey(
+											rs.getString("REFERENCED_TABLE_NAME")
+													+ " ("
+													+ rs.getString("REFERENCED_COLUMN_NAME")
+													+ ")");
+						} else {
+
 						}
 					}
 				}
