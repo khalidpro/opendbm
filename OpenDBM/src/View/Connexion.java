@@ -4,9 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
+
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -33,7 +31,7 @@ public class Connexion extends JFrame {
 
 	String[] base = { "MySQL", "Oracle", "SQL Server", "Access" };
 	JComboBox liste_db = new JComboBox(base);
-	JLabel type = new JLabel("Type de base de donnée :");
+	JLabel type = new JLabel("Type de base de donnÃ©e :");
 
 	JButton con = new JButton("Connexion");
 
@@ -93,8 +91,8 @@ public class Connexion extends JFrame {
 				} else if (value == "Oracle") {
 					driver = new Oracle();
 				}
-				DataBaseManager.manager = new Manager(driver);
-				DataBaseManager.db = DataBaseManager.manager.getSchema();
+				Manager m = new Manager(driver);
+				DataBaseManager.db = m.getSchema();
 				DataBaseManager.databaseExplorer
 						.CreateDatabaseTree(DataBaseManager.db);
 				dispose();
@@ -116,7 +114,7 @@ public class Connexion extends JFrame {
 		JLabel lblPort = new JLabel("Port  :");
 		JLabel lblUser = new JLabel("Utilisateur :");
 		JLabel lblPassword = new JLabel("Mot de passe :");
-		JLabel lblDatabase = new JLabel("Base de donnée :");
+		JLabel lblDatabase = new JLabel("Base de donnÃ©e :");
 
 		Dimension d = new Dimension(140, 28);
 
