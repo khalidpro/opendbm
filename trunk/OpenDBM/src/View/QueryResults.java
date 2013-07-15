@@ -24,7 +24,7 @@ public class QueryResults extends JPanel {
 
 	public void setResults(ArrayList<Row> rows) {
 		
-		System.out.println(rows.size());
+
 		if (rows.size() > 0) {
 
 			String[] entetes = new String[rows.get(0).getFieldsCount()];
