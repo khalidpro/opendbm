@@ -34,15 +34,19 @@ public class ToolBarre extends JToolBar {
 		sql.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				DataBaseManager.queryEditor.editeur.setText(DataBaseManager.db.getSQL());
+				DataBaseManager.queryEditor.editeur.setText(DataBaseManager.db
+						.getSQL());
 			}
 		});
 
 		this.add(executer);
 		executer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 
-				DataBaseManager.queryResults.setResults(DataBaseManager.manager.getResultat(DataBaseManager.queryEditor.getEditeurText()));
+				DataBaseManager.queryResults.setResults(DataBaseManager.manager
+						.getResultat(DataBaseManager.queryEditor
+								.getEditeurText()));
+
 			}
 		});
 	}

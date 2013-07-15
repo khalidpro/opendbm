@@ -38,6 +38,7 @@ public class Manager {
 	{
 		driver.connection();
 		ArrayList<Row> r=this.driver.getResultat(query);
+			
 		driver.disconnect();
 		return r;
 	}

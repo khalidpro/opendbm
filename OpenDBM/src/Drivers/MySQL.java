@@ -130,7 +130,7 @@ public class MySQL implements IDriver {
 
 	@Override
 	public ArrayList<Row> getResultat(String query) {
-
+		System.out.println(query);
 		ArrayList<Row> rows = new ArrayList<Row>();
 		try {
 			this.stmt = this.con.createStatement();
