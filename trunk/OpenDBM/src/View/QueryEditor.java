@@ -81,9 +81,7 @@ public class QueryEditor extends JPanel {
 						.compile("(^|\\s+)(" + strToHL + ")(\\s+|$)");
 				Matcher m = p.matcher(text);
 				while (m.find() == true) {
-					System.out.println("Found    '" + m.group(2)
-							+ "'  at position  " + m.start(2) + "-" + m.end(2)
-							+ "   +++\n");
+				
 					MutableAttributeSet attri = new SimpleAttributeSet();
 					StyleConstants.setForeground(attri, Color.blue);
 					StyleConstants.setBold(attri, true);
